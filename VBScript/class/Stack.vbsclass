@@ -1,0 +1,71 @@
+'***************************************************************
+'スタック
+'***************************************************************
+Option Explicit
+'***************************************************************
+Class Stack
+
+	'プロパティ
+	Private strStack()	'動的配列(Extensionメソッドにより拡張)
+	Private strBuf
+	Private intStackPointer	'スタックポインタ
+
+	'コンストラクタ
+	Private Sub Class_Initialize
+
+		ReDim strStack(10)
+		intStackPointer = 0
+
+	End Sub
+
+	'デストラクタ
+	Private Sub Class_Terminate
+	End Sub
+
+	'プッシュ
+	Public Function Push(strVal)
+
+		strStack(intStackPointer) = strVal
+		intStackPointer = intStackPointer + 1
+
+		'配列が5つ消費されると自動拡張
+		If (intStackPointer Mod 5) = 0 Then
+			Extension
+		End If
+
+	End Function
+
+	'ポップ
+	Public Function Pop
+
+		intStackPointer = intStackPointer - 1
+		strBuf = strStack(intStackPointer)
+		Pop = strBuf
+
+	End Function
+
+	'ピーク(Top操作とも) Peek:覗き見
+	Public Function Peek
+
+		strBuf = strStack(intStackPointer - 1)
+		Peek = strBuf
+
+	End Function
+
+	'キュー要素数取得
+	Public Function GetDepth
+
+		GetDepth = intStackPointer
+
+	End Function
+
+	'配列拡張
+	Private Function Extension
+
+		'Preserveをつけると拡張後も配列の値が保存される。Preserve(保存)
+		ReDim Preserve strStack(intStackPointer + 10)
+
+	End Function
+
+End Class
+'***************************************************************

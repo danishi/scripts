@@ -1,0 +1,54 @@
+ <job>
+ <script language="vbscript" src="..\Queue.vbsclass"/>
+ <script language="vbscript">
+'***************************************************************
+'テスター
+
+Dim objQueue
+Dim strBuf
+Dim intBuf
+
+'インスタンス化
+Set objQueue = New Queue
+
+objQueue.Enqueue("A1")
+objQueue.Enqueue("B2")
+intBuf = objQueue.First
+WScript.Echo intBuf
+intBuf = objQueue.Last
+WScript.Echo intBuf
+
+intBuf = objQueue.GetLength
+WScript.Echo intBuf
+
+objQueue.Enqueue("CCC33")
+objQueue.Enqueue("DD4")
+objQueue.Enqueue("5")
+objQueue.Enqueue("5")
+objQueue.Enqueue("5")
+objQueue.Enqueue("5")
+objQueue.Enqueue("5")
+objQueue.Enqueue("5")
+
+intBuf = objQueue.GetLength
+WScript.Echo intBuf
+
+strBuf = objQueue.Dequeue
+WScript.Echo strBuf
+strBuf = objQueue.Dequeue
+WScript.Echo strBuf
+strBuf = objQueue.Dequeue
+WScript.Echo strBuf
+strBuf = objQueue.Dequeue
+WScript.Echo strBuf
+strBuf = objQueue.Dequeue
+WScript.Echo strBuf
+
+'インスタンスの破棄
+Set objQueue = Nothing
+
+WScript.Echo "End"
+
+'***************************************************************
+</script>
+</job>

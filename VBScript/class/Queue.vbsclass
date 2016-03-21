@@ -1,0 +1,83 @@
+'***************************************************************
+'キュー
+'***************************************************************
+Option Explicit
+'***************************************************************
+Class Queue
+
+	'プロパティ
+	Private strQueue()	'動的配列(Extensionメソッドにより拡張)
+	Private strBuf
+	Private intFirst	'先頭位置
+	Private intLength	'キュー内のデータ数
+	Private i
+
+	'コンストラクタ
+	Private Sub Class_Initialize
+
+		ReDim strQueue(10)
+		intLength = 0
+		intFirst = 0
+		i = 0
+
+	End Sub
+
+	'デストラクタ
+	Private Sub Class_Terminate
+	End Sub
+
+	'エンキュー
+	Public Function Enqueue(strVal)
+
+		strQueue(i) = strVal
+		intLength = intLength + 1
+		i = i + 1
+
+		'配列が5つ消費されると自動拡張
+		If (i Mod 5) = 0 Then
+			Extension
+		End If
+
+	End Function
+
+	'デキュー
+	Public Function Dequeue
+
+		strBuf = strQueue(intFirst)
+		intFirst = intFirst + 1
+		intLength = intLength -1
+		Dequeue = strBuf
+
+	End Function
+
+	Public Function First
+
+		strBuf = strQueue(intFirst)
+		First = strBuf
+
+	End Function
+
+	Public Function Last
+
+		strBuf = strQueue(intLength - 1)
+		Last = strBuf
+
+	End Function
+
+	'キュー要素数取得
+	Public Function GetLength
+
+		GetLength = intLength
+
+	End Function
+
+	'配列拡張
+	Private Function Extension
+
+		'Preserveをつけると拡張後も配列の値が保存される。Preserve(保存)
+		ReDim Preserve strQueue(i + 10)
+
+	End Function
+
+End Class
+'***************************************************************

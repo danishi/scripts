@@ -1,0 +1,60 @@
+ <job>
+ <script language="vbscript" src="..\Stack.vbsclass"/>
+ <script language="vbscript">
+'***************************************************************
+'テスター
+
+Dim objStack
+Dim strBuf
+Dim intBuf
+
+'インスタンス化
+Set objStack = New Stack
+
+objStack.Push("A1")
+
+strBuf = objStack.Peek
+WScript.Echo strBuf
+
+intBuf = objStack.GetDepth
+WScript.Echo "深さ" & intBuf
+
+strBuf = objStack.Pop
+WScript.Echo strBuf
+
+objStack.Push("B2")
+objStack.Push("CCC33")
+objStack.Push("DD4")
+objStack.Push("5")
+objStack.Push("6")
+objStack.Push("7")
+objStack.Push("8")
+objStack.Push("9")
+objStack.Push("10")
+
+intBuf = objStack.GetDepth
+WScript.Echo "深さ" & intBuf
+
+strBuf = objStack.Pop
+WScript.Echo strBuf
+strBuf = objStack.Pop
+WScript.Echo strBuf
+strBuf = objStack.Pop
+
+intBuf = objStack.GetDepth
+WScript.Echo "深さ" & intBuf
+
+WScript.Echo strBuf
+strBuf = objStack.Pop
+WScript.Echo strBuf
+strBuf = objStack.Pop
+WScript.Echo strBuf
+
+'インスタンスの破棄
+Set objStack = Nothing
+
+WScript.Echo "End"
+
+'***************************************************************
+</script>
+</job>
