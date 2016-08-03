@@ -41,8 +41,8 @@ exit /b
 	::01234567890
 
 	 set /a H=%TIME:~0,-9%
-	 set /a M=%TIME:~3,-6%
-	 set /a S=%TIME:~6,-3%
+	 set M=%TIME:~3,-6%
+	 set S=%TIME:~6,-3%
 
 	if %H% lss 10 (
 		set H=0%H%
