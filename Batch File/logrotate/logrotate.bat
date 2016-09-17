@@ -9,16 +9,19 @@ call :getTimeStamp
 
 ::ログのローテーション
 for /f %%i in (logrotate.ini) do (
+	set path=%%i
+	rem コメント行"#"は無視
+	if "!path:~0,1!" neq "#" (
 
-	if exist %%i (
-		move %%i "%%i_%TimeStamp%"
-		type nul > %%i
+		if exist !path! (
+			move !path! "!path!_%TimeStamp%"
+		type nul > !path!
+		)
+
+		rem ログの削除
+		call :getDirName !path!
+		C:\windows\system32\forfiles /P !dirname! /D %deleteLimit% /M "*.log*" /c "cmd /c del @path"
 	)
-
-	rem ログの削除
-	call :getDirName %%i
-	forfiles /P !dirname! /D %deleteLimit% /M "*.log*" /c "cmd /c del @path"
-
 )
 
 endlocal
