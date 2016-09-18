@@ -9,15 +9,14 @@ call :getTimeStamp
 
 ::ログのローテーション
 for /f "delims=? eol=#" %%i in (logrotate.ini) do (
-	echo %%i
 
 	if exist "%%i" (
 		move "%%i" "%%i_%TimeStamp%"
-		type nul > %%i
+		type nul > "%%i"
 	)
 
 	rem ログの削除
-	call :getDirName %%i
+	call :getDirName "%%i"
 	forfiles /P !dirname! /D %deleteLimit% /M "*.log*" /c "cmd /c del @path"
 )
 
