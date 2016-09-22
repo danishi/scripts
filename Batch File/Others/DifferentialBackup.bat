@@ -12,8 +12,10 @@ pause > nul
 set /p HALT=終了後シャットダウンしますか(y/n)
 
 ::---下記コマンドを編集---
+set SourceDrive=G:\
+set DestDrive=F:\
 
-robocopy G:\ H:\ /MIR /R:1 /LOG:%homedrive%%homepath%^\Desktop^\copyLog.txt /NP
+robocopy %SourceDrive% %DestDrive% /MIR /R:1 /LOG:%homedrive%%homepath%^\Desktop^\copyLog.txt /NP
 
 ::------------------------
 
